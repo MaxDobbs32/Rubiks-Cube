@@ -1398,7 +1398,7 @@ class Ir():
         self.mas_alla = tk.Label(self.estuche, bg="#000000")
         self.menos_alla = tk.Label(self.estuche, bg="#000000")
         self.boton_de_pagina = tk.Label(self.estuche, bg="#00FFFF", bd=2, relief="raised", text="Next")
-        self.perfil = tk.Label(self.estuche, bg="#FFFF40")
+        self.perfil = tk.Label(self.estuche, bg="#FFA000")
         self.texto = tk.Label(self.estuche, font=("Helvetica", 18), bg=crayon, fg="#000000", justify=tk .LEFT)
         self.teclado_0 = tk.Label(self.estuche, font=("Courier", 18), bg=crayon, text="2  3")
         self.teclado_1 = tk.Label(self.estuche, font=("Courier", 18), bg=crayon, text="Q  W  E  R")
