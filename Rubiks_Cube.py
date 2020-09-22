@@ -9,50 +9,50 @@ def principal():
 
 def redondear(numero):
     if abs(numero - int(numero)) < 0.5:
-        repuesta = int(numero)
+        respuesta = int(numero)
     elif numero > 0:
-        repuesta = int(numero)+1
+        respuesta = int(numero)+1
     else:
-        repuesta = int(numero)-1
-    return repuesta
+        respuesta = int(numero)-1
+    return respuesta
 
 def factorial(numero):
-    repuesta = 1
+    respuesta = 1
     for cero in range(2, numero+1):
-        repuesta *= cero
-    return repuesta
+        respuesta *= cero
+    return respuesta
 
 def sen(numero):
     numero = numero % 6.283185307179586
-    repuesta = numero
+    respuesta = numero
     potencia = 3
     coef = -1
     while potencia < 60:
-        repuesta += coef * numero ** potencia / factorial(potencia)
+        respuesta += coef * numero ** potencia / factorial(potencia)
         potencia += 2
         coef *= -1
-    return repuesta
+    return respuesta
 
 def cos(numero):
     numero = numero % 6.283185307179586
-    repuesta = 1
+    respuesta = 1
     potencia = 2
     coef = -1
     while potencia < 60:
-        repuesta += coef * numero ** potencia / factorial(potencia)
+        respuesta += coef * numero ** potencia / factorial(potencia)
         potencia += 2
         coef *= -1
-    return repuesta
+    return respuesta
 
 def cuaternion(c, punto, c_1):
     producto = [c[0]*punto[0] - c[1]*punto[1] - c[2]*punto[2] - c[3]*punto[3],
                 c[0]*punto[1] + c[1]*punto[0] + c[2]*punto[3] - c[3]*punto[2],
                 c[0]*punto[2] + c[2]*punto[0] - c[1]*punto[3] + c[3]*punto[1],
                 c[0]*punto[3] + c[3]*punto[0] + c[1]*punto[2] - c[2]*punto[1]]
-    repuesta = [0, producto[0]*c_1[1] + producto[1]*c_1[0] + producto[2]*c_1[3] - producto[3]*c_1[2],
+    respuesta = [0, producto[0]*c_1[1] + producto[1]*c_1[0] + producto[2]*c_1[3] - producto[3]*c_1[2],
                 producto[0]*c_1[2] + producto[2]*c_1[0] - producto[1]*c_1[3] + producto[3]*c_1[1],
                 producto[0]*c_1[3] + producto[3]*c_1[0] + producto[1]*c_1[2] - producto[2]*c_1[1]]
-    return repuesta
+    return respuesta
 
 def luz(color, vector):
     i = 0.3922322702763681
@@ -295,7 +295,7 @@ class Ir():
 
     def Girar(self, angulo, v, h):
         r_del_r = [cos(angulo/2), v * sen(angulo/2), h * sen(angulo/2), 0]
-        reciproco = [cos(-angulo/2), v * sen(-angulo/2), h * sen(-angulo/2), 0]
+        reciproco = [cos(angulo/2), v * sen(-angulo/2), h * sen(-angulo/2), 0]
         for cero in range(8):
             self.vertice[cero] = cuaternion(r_del_r, self.vertice[cero], reciproco)
         for cero in range(24):
@@ -401,7 +401,7 @@ class Ir():
             h = self.vectores[cara][2]
             a = self.vectores[cara][3]
             r_del_r = [cos(angulo/2), v * sen(angulo/2), h * sen(angulo/2), a * sen(angulo/2)]
-            reciproco = [cos(-angulo/2), v * sen(-angulo/2), h * sen(-angulo/2), a * sen(-angulo/2)]
+            reciproco = [cos(angulo/2), v * sen(-angulo/2), h * sen(-angulo/2), a * sen(-angulo/2)]
             for cero in self.caras[cara]:
                 self.v_temp[cero] = cuaternion(r_del_r, self.v_temp[cero], reciproco)
             for cero in self.bloque[cara]:
