@@ -1213,10 +1213,10 @@ class Ir():
             self.teclado_1.lift()
             self.teclado_2.lift()
             self.teclado_3.lift()
-            self.teclado_0.place(x=228, y=87)
-            self.teclado_1.place(x=196, y=117)
-            self.teclado_2.place(x=196, y=147)
-            self.teclado_3.place(x=228, y=177)
+            self.teclado_0.place(x=225, y=77)
+            self.teclado_1.place(x=183, y=107)
+            self.teclado_2.place(x=183, y=137)
+            self.teclado_3.place(x=225, y=167)
             self.ventana.update()
         elif self.abierta:
             self.texto.configure(text=self.pagina_1)
@@ -1379,10 +1379,9 @@ class Ir():
     def Primero_Boton(self):
         color = "#A0FFFF"
         crayon = "#FFFFFF"
-        self.instrucciones = tk.Label(self.marco, font = ("Helvetica", 18), bg=color, relief="raised", bd=3,
-                                      text="Instructions")
-        self.resolver = tk.Label(self.marco, font=("Helvetica", 18), bg=color, text="Solve", relief="raised", bd=3)
-        self.rapido = tk.Label(self.marco, font=("Helvetica", 18), text="Quick Solve", bg=color, relief="raised", bd=3)
+        self.instrucciones = tk.Label(self.marco, font = ("Helvetica", 15), bg=color, relief="raised", bd=3, text="Instructions")
+        self.resolver = tk.Label(self.marco, font=("Helvetica", 15), bg=color, text="Solve", relief="raised", bd=3)
+        self.rapido = tk.Label(self.marco, font=("Helvetica", 15), text="Quick Solve", bg=color, relief="raised", bd=3)
         self.i_som = tk.Label(self.marco, bg="#000000")
         self.i_som.place(height=37, width=116, y=45, x=50)
         self.s_som = tk.Label(self.marco, bg="#000000")
@@ -1399,7 +1398,7 @@ class Ir():
         self.menos_alla = tk.Label(self.estuche, bg="#000000")
         self.boton_de_pagina = tk.Label(self.estuche, bg="#00FFFF", bd=2, relief="raised", text="Next")
         self.perfil = tk.Label(self.estuche, bg="#FFA000")
-        self.texto = tk.Label(self.estuche, font=("Helvetica", 18), bg=crayon, fg="#000000", justify=tk .LEFT)
+        self.texto = tk.Label(self.estuche, font=("Helvetica", 14), bg=crayon, fg="#000000", justify=tk.LEFT)
         self.teclado_0 = tk.Label(self.estuche, font=("Courier", 18), bg=crayon, text="2  3")
         self.teclado_1 = tk.Label(self.estuche, font=("Courier", 18), bg=crayon, text="Q  W  E  R")
         self.teclado_2 = tk.Label(self.estuche, font=("Courier", 18), bg=crayon, text="A  S  D  F")
@@ -1569,7 +1568,7 @@ bright colors.
 See the next page for rotating each face of the cube
 manually.\n\n"""
         self.pagina_2 = \
-"""It may help to think of the following keys as forming a   
+"""It may help to think of the following keys as forming a
 grid on your keyboard:\n\n\n\n\n\n
 2:  turns the left side up
 3:  turns the right side up
