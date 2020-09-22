@@ -295,7 +295,7 @@ class Ir():
 
     def Girar(self, angulo, v, h):
         r_del_r = [cos(angulo/2), v * sen(angulo/2), h * sen(angulo/2), 0]
-        reciproco = [cos(-angulo/2), v * sen(-angulo/2), h * sen(-angulo/2), 0]
+        reciproco = [cos(angulo/2), v * sen(-angulo/2), h * sen(-angulo/2), 0]
         for cero in range(8):
             self.vertice[cero] = cuaternion(r_del_r, self.vertice[cero], reciproco)
         for cero in range(24):
@@ -401,7 +401,7 @@ class Ir():
             h = self.vectores[cara][2]
             a = self.vectores[cara][3]
             r_del_r = [cos(angulo/2), v * sen(angulo/2), h * sen(angulo/2), a * sen(angulo/2)]
-            reciproco = [cos(-angulo/2), v * sen(-angulo/2), h * sen(-angulo/2), a * sen(-angulo/2)]
+            reciproco = [cos(angulo/2), v * sen(-angulo/2), h * sen(-angulo/2), a * sen(-angulo/2)]
             for cero in self.caras[cara]:
                 self.v_temp[cero] = cuaternion(r_del_r, self.v_temp[cero], reciproco)
             for cero in self.bloque[cara]:
