@@ -24,46 +24,46 @@ def principal():
 # Rounds decimals to whole numbers
 def redondear(numero):
     if abs(numero - int(numero)) < 0.5:
-        repuesta = int(numero)
+        respuesta = int(numero)
     elif numero > 0:
-        repuesta = int(numero)+1
+        respuesta = int(numero)+1
     else:
-        repuesta = int(numero)-1
-    return repuesta
+        respuesta = int(numero)-1
+    return respuesta
 
 
 # Finds the factorial of a number, which is used in the sine and cosine functions that follow
 def factorial(numero):
-    repuesta = 1
+    respuesta = 1
     for cero in range(2, numero+1):
-        repuesta *= cero
-    return repuesta
+        respuesta *= cero
+    return respuesta
 
 
 # Finds the sine of a number using a Taylor polynomial
 def sen(numero):
     numero = numero % 6.283185307179586
-    repuesta = numero
+    respuesta = numero
     potencia = 3
     coef = -1
     while potencia < 60:
-        repuesta += coef * numero ** potencia / factorial(potencia)
+        respuesta += coef * numero ** potencia / factorial(potencia)
         potencia += 2
         coef *= -1
-    return repuesta
+    return respuesta
 
 
 # Finds the cosine of a number using a Taylor polynomial
 def cos(numero):
     numero = numero % 6.283185307179586
-    repuesta = 1
+    respuesta = 1
     potencia = 2
     coef = -1
     while potencia < 60:
-        repuesta += coef * numero ** potencia / factorial(potencia)
+        respuesta += coef * numero ** potencia / factorial(potencia)
         potencia += 2
         coef *= -1
-    return repuesta
+    return respuesta
 
 
 # This function multiplies 3 quaternions together. Quaternions are essentially 4-dimensional complex numbers that do a
@@ -75,10 +75,10 @@ def cuaternion(c, punto, c_1):
                 c[0]*punto[1] + c[1]*punto[0] + c[2]*punto[3] - c[3]*punto[2],
                 c[0]*punto[2] + c[2]*punto[0] - c[1]*punto[3] + c[3]*punto[1],
                 c[0]*punto[3] + c[3]*punto[0] + c[1]*punto[2] - c[2]*punto[1]]
-    repuesta = [0, producto[0]*c_1[1] + producto[1]*c_1[0] + producto[2]*c_1[3] - producto[3]*c_1[2],
+    respuesta = [0, producto[0]*c_1[1] + producto[1]*c_1[0] + producto[2]*c_1[3] - producto[3]*c_1[2],
                 producto[0]*c_1[2] + producto[2]*c_1[0] - producto[1]*c_1[3] + producto[3]*c_1[1],
                 producto[0]*c_1[3] + producto[3]*c_1[0] + producto[1]*c_1[2] - producto[2]*c_1[1]]
-    return repuesta
+    return respuesta
 
 
 # This function changes the color of a square sticker based on its direction. It is responsible for the animated
@@ -1682,6 +1682,7 @@ class Ir():
                 [[-c, b, i], [c, b, i], [c, b, m], [-c, b, m]],
                 [[i, b, i], [m, b, i], [m, b, m], [i, b, m]]
             ]]
+        
         self.pagina_1 = \
 """Click the screen to start dragging the cube. Click again
 to stop. (Drag at a fairly slow pace for better results.)
