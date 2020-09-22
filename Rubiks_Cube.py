@@ -1547,6 +1547,7 @@ class Ir():
                 [[-c, b, i], [c, b, i], [c, b, m], [-c, b, m]],
                 [[i, b, i], [m, b, i], [m, b, m], [i, b, m]]
             ]]
+        
         self.pagina_1 = \
 """Click the screen to start dragging the cube. Click again
 to stop. (Drag at a fairly slow pace for better results.)
