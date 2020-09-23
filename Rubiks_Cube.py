@@ -1226,7 +1226,7 @@ class Ir():
                 self.teclado_1.place(x=183, y=107)
                 self.teclado_2.place(x=183, y=137)
                 self.teclado_3.place(x=225, y=167)
-                self.ventana.update()
+            self.ventana.update()
         elif self.abierta:
             self.texto.configure(text=self.pagina_1)
             self.boton_de_pagina.configure(text="Next")
@@ -1560,7 +1560,6 @@ class Ir():
                 [[-c, b, i], [c, b, i], [c, b, m], [-c, b, m]],
                 [[i, b, i], [m, b, i], [m, b, m], [i, b, m]]
             ]]
-
         self.pagina_1 = \
 """Click the screen to start dragging the cube. Click again
 to stop. (Drag at a fairly slow pace for better results.)
