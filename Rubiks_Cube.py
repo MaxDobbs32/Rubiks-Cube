@@ -1406,7 +1406,7 @@ class Ir():
         self.rapido.lift()
         self.mas_alla = tk.Label(self.estuche, bg="#000000")
         self.menos_alla = tk.Label(self.estuche, bg="#000000")
-        self.boton_de_pagina = tk.Label(self.estuche, bg="#00FFFF", bd=2, relief="raised")
+        self.boton_de_pagina = tk.Label(self.estuche, font=("Helvetica", 15), bg="#00FFFF", bd=2, relief="raised")
         self.perfil = tk.Label(self.estuche, bg="#FFA000")
         self.teclado_0 = tk.Label(self.estuche, font=("Courier", 18), bg=crayon, text="2  3")
         self.teclado_1 = tk.Label(self.estuche, font=("Courier", 18), bg=crayon, text="Q  W  E  R")
