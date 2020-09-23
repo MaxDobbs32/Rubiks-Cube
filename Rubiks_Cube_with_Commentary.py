@@ -2,12 +2,13 @@
 
 # The Random module randomly generates numbers and makes choices. This allows the program to scramble the cube and
 # decide what side to start on when solving it.
-import random
+import random, platform
 
 # The Tkinter module opens windows and places shapes, text, and colors on them. All of the graphics run through Tkinter.
 import tkinter as tk
 
-
+os_bool = (platform.system() == "Darwin")
+font_size = 18 if os_bool else 15
 
 # principal() acts as the program's main function, and it is called at the very end of the script after everything else
 # is defined. It creates a hexadecimal numbering system, runs the class, and keeps the window open until you close it.
@@ -1322,10 +1323,10 @@ class Ir():
             self.teclado_1.lift()
             self.teclado_2.lift()
             self.teclado_3.lift()
-            self.teclado_0.place(x=228, y=87)
-            self.teclado_1.place(x=196, y=117)
-            self.teclado_2.place(x=196, y=147)
-            self.teclado_3.place(x=228, y=177)
+            self.teclado_0.place(x=225, y=77)
+            self.teclado_1.place(x=183, y=107)
+            self.teclado_2.place(x=183, y=137)
+            self.teclado_3.place(x=225, y=167)
             self.ventana.update()
         elif self.abierta:
             self.texto.configure(text=self.pagina_1)
@@ -1506,10 +1507,9 @@ class Ir():
     def Primero_Boton(self):
         color = "#A0FFFF"
         crayon = "#FFFFFF"
-        self.instrucciones = tk.Label(self.marco, font = ("Helvetica", 18), bg=color, relief="raised", bd=3,
-                                      text="Instructions")
-        self.resolver = tk.Label(self.marco, font=("Helvetica", 18), bg=color, text="Solve", relief="raised", bd=3)
-        self.rapido = tk.Label(self.marco, font=("Helvetica", 18), text="Quick Solve", bg=color, relief="raised", bd=3)
+        self.instrucciones = tk.Label(self.marco, font = ("Helvetica", font_size), bg=color, relief="raised", bd=3, text="Instructions")
+        self.resolver = tk.Label(self.marco, font=("Helvetica", font_size), bg=color, text="Solve", relief="raised", bd=3)
+        self.rapido = tk.Label(self.marco, font=("Helvetica", font_size), text="Quick Solve", bg=color, relief="raised", bd=3)
         self.i_som = tk.Label(self.marco, bg="#000000")
         self.i_som.place(height=37, width=116, y=45, x=50)
         self.s_som = tk.Label(self.marco, bg="#000000")
@@ -1526,12 +1526,14 @@ class Ir():
         self.menos_alla = tk.Label(self.estuche, bg="#000000")
         self.boton_de_pagina = tk.Label(self.estuche, bg="#00FFFF", bd=2, relief="raised", text="Next")
         self.perfil = tk.Label(self.estuche, bg="#FFA000")
-        self.texto = tk.Label(self.estuche, font=("Helvetica", 18), bg=crayon, fg="#000000", justify=tk .LEFT)
         self.teclado_0 = tk.Label(self.estuche, font=("Courier", 18), bg=crayon, text="2  3")
         self.teclado_1 = tk.Label(self.estuche, font=("Courier", 18), bg=crayon, text="Q  W  E  R")
         self.teclado_2 = tk.Label(self.estuche, font=("Courier", 18), bg=crayon, text="A  S  D  F")
         self.teclado_3 = tk.Label(self.estuche, font=("Courier", 18), bg=crayon, text="X  C")
-
+        if os_bool:
+            self.texto = tk.Label(self.estuche, font=("Helvetica", 18), bg=crayon, fg="#000000", justify=tk.LEFT)
+        else:
+            self.texto = tk.Label(self.estuche, font=("Helvetica", 14), bg=crayon, fg="#000000", justify=tk.LEFT)
 
     # Assigns commands to key presses and the screen click. It is called once at the beginning and whenever the
     # instruction menu is closed.
@@ -1683,6 +1685,7 @@ class Ir():
                 [[-c, b, i], [c, b, i], [c, b, m], [-c, b, m]],
                 [[i, b, i], [m, b, i], [m, b, m], [i, b, m]]
             ]]
+
         self.pagina_1 = \
 """Click the screen to start dragging the cube. Click again
 to stop. (Drag at a fairly slow pace for better results.)
