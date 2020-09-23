@@ -1385,6 +1385,7 @@ class Ir():
             if self.serie and self.abierta:
                 self.ventana.after(0, self.Cambiar)
 
+    def Primero_Boton(self):
         color = "#A0FFFF"
         crayon = "#FFFFFF"
         self.instrucciones = tk.Label(self.marco, font = ("Helvetica", tamano), bg=color, relief="raised", bd=3,
