@@ -1325,10 +1325,16 @@ class Ir():
             self.teclado_1.lift()
             self.teclado_2.lift()
             self.teclado_3.lift()
-            self.teclado_0.place(x=225, y=77)
-            self.teclado_1.place(x=183, y=107)
-            self.teclado_2.place(x=183, y=137)
-            self.teclado_3.place(x=225, y=167)
+            if os_bool:
+                self.teclado_0.place(x=228, y=87)
+                self.teclado_1.place(x=196, y=117)
+                self.teclado_2.place(x=196, y=147)
+                self.teclado_3.place(x=228, y=177)
+            else:
+                self.teclado_0.place(x=225, y=77)
+                self.teclado_1.place(x=183, y=107)
+                self.teclado_2.place(x=183, y=137)
+                self.teclado_3.place(x=225, y=167)
             self.ventana.update()
         elif self.abierta:
             self.texto.configure(text=self.pagina_1)
