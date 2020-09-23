@@ -1216,7 +1216,6 @@ class Ir():
             self.teclado_1.lift()
             self.teclado_2.lift()
             self.teclado_3.lift()
-
             if os_bool:
                 self.teclado_0.place(x=228, y=87)
                 self.teclado_1.place(x=196, y=117)
