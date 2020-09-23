@@ -2,7 +2,7 @@ import random, platform
 import tkinter as tk
 
 os_bool = (platform.system() == "Darwin")
-tamano_de_fuente = 18 if os_bool else 15
+tamano = 18 if os_bool else 15
 
 def principal():
     global hexadecimal
@@ -1389,9 +1389,10 @@ class Ir():
     def Primero_Boton(self):
         color = "#A0FFFF"
         crayon = "#FFFFFF"
-        self.instrucciones = tk.Label(self.marco, font = ("Helvetica", tamano_de_fuente), bg=color, relief="raised", bd=3, text="Instructions")
-        self.resolver = tk.Label(self.marco, font=("Helvetica", tamano_de_fuente), bg=color, text="Solve", relief="raised", bd=3)
-        self.rapido = tk.Label(self.marco, font=("Helvetica", tamano_de_fuente), text="Quick Solve", bg=color, relief="raised", bd=3)
+        self.instrucciones = tk.Label(self.marco, font = ("Helvetica", tamano), bg=color, relief="raised", bd=3,
+                                      text="Instructions")
+        self.resolver = tk.Label(self.marco, font=("Helvetica", tamano), bg=color, text="Solve", relief="raised", bd=3)
+        self.rapido = tk.Label(self.marco, font=("Helvetica", tamano), text="Quick Solve", bg=color, relief="raised", bd=3)
         self.i_som = tk.Label(self.marco, bg="#000000")
         self.i_som.place(height=37, width=116, y=45, x=50)
         self.s_som = tk.Label(self.marco, bg="#000000")
