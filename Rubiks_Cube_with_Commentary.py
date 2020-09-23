@@ -1,14 +1,16 @@
 # These are the modules used for running the program:
 
 # The Random module randomly generates numbers and makes choices. This allows the program to scramble the cube and
-# decide what side to start on when solving it.
+# decide what side to start on when solving it. The Platform module allows changes based on what system the program is
+# being run on.
 import random, platform
 
 # The Tkinter module opens windows and places shapes, text, and colors on them. All of the graphics run through Tkinter.
 import tkinter as tk
 
+# Changes the font size of text in the program, depending on what system is being used.
 os_bool = (platform.system() == "Darwin")
-font_size = 18 if os_bool else 15
+tamano = 18 if os_bool else 15
 
 # principal() acts as the program's main function, and it is called at the very end of the script after everything else
 # is defined. It creates a hexadecimal numbering system, runs the class, and keeps the window open until you close it.
@@ -1507,9 +1509,10 @@ class Ir():
     def Primero_Boton(self):
         color = "#A0FFFF"
         crayon = "#FFFFFF"
-        self.instrucciones = tk.Label(self.marco, font = ("Helvetica", font_size), bg=color, relief="raised", bd=3, text="Instructions")
-        self.resolver = tk.Label(self.marco, font=("Helvetica", font_size), bg=color, text="Solve", relief="raised", bd=3)
-        self.rapido = tk.Label(self.marco, font=("Helvetica", font_size), text="Quick Solve", bg=color, relief="raised", bd=3)
+        self.instrucciones = tk.Label(self.marco, font = ("Helvetica", tamano), bg=color, relief="raised", bd=3,
+                                      text="Instructions")
+        self.resolver = tk.Label(self.marco, font=("Helvetica", tamano), bg=color, text="Solve", relief="raised", bd=3)
+        self.rapido = tk.Label(self.marco, font=("Helvetica", tamano), text="Quick Solve", bg=color, relief="raised", bd=3)
         self.i_som = tk.Label(self.marco, bg="#000000")
         self.i_som.place(height=37, width=116, y=45, x=50)
         self.s_som = tk.Label(self.marco, bg="#000000")
