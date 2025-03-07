@@ -1,30 +1,15 @@
-# These are the modules used for running the program:
-
-# The Random module randomly generates numbers and makes choices. This allows the program to scramble the cube and
-# decide what side to start on when solving it. The Platform module allows changes based on what system the program is
-# being run on.
 import random, platform
-
-# The Tkinter module opens windows and places shapes, text, and colors on them. All of the graphics run through Tkinter.
 import tkinter as tk
 
-# Changes the font size of text in the program, depending on what system is being used.
 os_bool = (platform.system() == "Darwin")
 tamano = 18 if os_bool else 15
 
-# principal() acts as the program's main function, and it is called at the very end of the script after everything else
-# is defined. It creates a hexadecimal numbering system, runs the class, and keeps the window open until you close it.
-# Almost all variables and functions are named in Spanish, mainly so that I could become more familiar with Spanish
-# vocabulary as I coded this. However, I would not recommend depending on a dictionary, since half the words are inside
-# jokes only I understand.
 def principal():
     global hexadecimal
     hexadecimal = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
     programa = Ir()
     programa.ventana.mainloop()
 
-
-# Rounds decimals to whole numbers
 def redondear(numero):
     if abs(numero - int(numero)) < 0.5:
         respuesta = int(numero)
@@ -34,16 +19,12 @@ def redondear(numero):
         respuesta = int(numero)-1
     return respuesta
 
-
-# Finds the factorial of a number, which is used in the sine and cosine functions that follow
 def factorial(numero):
     respuesta = 1
     for cero in range(2, numero+1):
         respuesta *= cero
     return respuesta
 
-
-# Finds the sine of a number using a Taylor polynomial
 def sen(numero):
     numero = numero % 6.283185307179586
     respuesta = numero
@@ -55,8 +36,6 @@ def sen(numero):
         coef *= -1
     return respuesta
 
-
-# Finds the cosine of a number using a Taylor polynomial
 def cos(numero):
     numero = numero % 6.283185307179586
     respuesta = 1
@@ -68,11 +47,6 @@ def cos(numero):
         coef *= -1
     return respuesta
 
-
-# This function multiplies 3 quaternions together. Quaternions are essentially 4-dimensional complex numbers that do a
-# fantastic job portraying 3-dimensional objects. Additionally, multiplying specific quaternions can imitate 3D
-# rotation. To learn more, I highly recommend 3Blue1Brown's content on YouTube. Just know that this tiny function is the
-# crux of anything involving rotation.
 def cuaternion(c, punto, c_1):
     producto = [c[0]*punto[0] - c[1]*punto[1] - c[2]*punto[2] - c[3]*punto[3],
                 c[0]*punto[1] + c[1]*punto[0] + c[2]*punto[3] - c[3]*punto[2],
@@ -83,9 +57,6 @@ def cuaternion(c, punto, c_1):
                 producto[0]*c_1[3] + producto[3]*c_1[0] + producto[1]*c_1[2] - producto[2]*c_1[1]]
     return respuesta
 
-
-# This function changes the color of a square sticker based on its direction. It is responsible for the animated
-# "shadow" effect.
 def luz(color, vector):
     i = 0.3922322702763681
     j = 0.5883484054145521
@@ -99,14 +70,8 @@ def luz(color, vector):
     a = hexadecimal[a // 16] + hexadecimal[a % 16]
     return "#"+r+v+a
 
-
-
-# Ir() is a class that creates the cube and allows you to interact with it.
 class Ir():
 
-    # This is the first function in the class, and it sets everything up. It creates the cube, the background, and the
-    # interface. The functions self.Sistema(), self.Primero_Boton(), and self.Boton() are found at the end, and they can
-    # show you more of what exactly is being set up.
     def __init__(self):
         self.Sistema()
         self.ventana = tk.Tk()
@@ -130,12 +95,6 @@ class Ir():
         self.Primero_Boton()
         self.Boton()
 
-
-
-    #           ORGANIZATION AND ANIMATION
-
-    # This function allows multiple animations to happen at once, such as rotating a side while orienting the entire
-    # cube. It also paces the program and prevents it from crashing.
     def Cambiar(self):
         declaracion = True
         if self.rg != None:
@@ -158,10 +117,6 @@ class Ir():
             if self.abierta:
                 self.ventana.after(0, self.Cambiar)
 
-
-    # This uses information about the cube to create a series of shapes. Because it is so precise, these shapes come
-    # together to look like a 3D cube. The shapes must be created in order from farthest to closest to yield a cohesive
-    # image.
     def Crear(self):
         self.cuadro = [[self.vertice[0], self.vertice[2], self.vertice[6], self.vertice[4]],
                        [self.vertice[0], self.vertice[1], self.vertice[3], self.vertice[2]],
@@ -271,9 +226,6 @@ class Ir():
         if self.regla == 3:
             self.regla = 1
 
-
-    # Determines which sides of the cube are closest and which are farthest. This information is used by self.Crear(),
-    # self.Ay_caramba(), and other functions.
     def Ordenar(self, cual):
         lista = []
         for cero in range(6):
@@ -313,9 +265,6 @@ class Ir():
             if not [1, porque] in self.todos:
                 self.todos.insert(0, [1, porque])
 
-
-    # Determines which side is above and which is to the left of the closest side. This is used for manual controls (key
-    # presses).
     def Ay_caramba(self):
         proximo = self.verdad[2]
         lista = []
@@ -340,8 +289,6 @@ class Ir():
         self.caramba = cara
         self.ay = self.al_lado_des[proximo][(self.al_lado_des[proximo].index(cara)-1)%4]
 
-
-    # Ensures no errors occur when closing the window
     def Terminar(self):
         if not self.abierta:
             self.ventana.destroy()
@@ -349,12 +296,6 @@ class Ir():
             self.abierta = False
             self.ventana.after(17, self.Terminar)
 
-
-
-    #           ROTATION
-
-    # This function rotates every point on the cube using quaternions. It orients it in certain directions but does not
-    # rotate individual sides.
     def Girar(self, angulo, v, h):
         r_del_r = [cos(angulo/2), v * sen(angulo/2), h * sen(angulo/2), 0]
         reciproco = [cos(angulo/2), v * sen(-angulo/2), h * sen(-angulo/2), 0]
@@ -393,8 +334,6 @@ class Ir():
             for cero in range(4):
                 self.vec_temp[cero] = cuaternion(r_del_r, self.vec_temp[cero], reciproco)
 
-
-    # This function rotates the sides on an informational level, so that the computer knows how the cube should look.
     def Girar_lado(self, cara, coso):
         nueva = [self.cubo_de_roobit[0][:], self.cubo_de_roobit[1][:], self.cubo_de_roobit[2][:],
                  self.cubo_de_roobit[3][:], self.cubo_de_roobit[4][:], self.cubo_de_roobit[5][:]]
@@ -434,9 +373,6 @@ class Ir():
         if self.regla == 2:
             self.regla = 3
 
-
-    # This function provides the information necessary for animating side rotations. It also uses quaternion
-    # multiplication for this purpose. Note that this function is never used during a "Quick Solve".
     def Animar(self, cara, coso):
         if self.circunferencia == 0:
             self.v_temp = []
@@ -493,12 +429,6 @@ class Ir():
             self.Girar_lado(cara, coso)
             self.ra = None
 
-
-
-    #           ARTIFICIAL INTELLIGENCE / COMPUTER SOLVING
-
-    # When a side is rotated, the AI has to be temporarily interrupted. This function checks the status of the rotation
-    # frequently. When the rotation is complete, it returns to whatever step the AI was on.
     def Sala_de_espera(self):
         if self.regla == 0 and self.abierta:
             if self.ra == None:
@@ -514,9 +444,6 @@ class Ir():
             if self.abierta:
                 self.ventana.after(numero, func)
 
-
-    # Algorithms can be stored in the list, self.recordar. This function executes those algorithms then returns to
-    # whatever step the AI was on.
     def Algoritmo(self):
         if self.regla == 0:
             if len(self.recordar) > 1:
@@ -535,10 +462,6 @@ class Ir():
             if self.abierta:
                 self.ventana.after(0, func)
 
-
-    # This is where the AI sequence starts. The function checks to see how solved the Rubik's Cube is. If a certain step
-    # is already complete, it will automatically scramble the cube. Then it selects which side will act as the top face
-    # and proceeds to the next step, self.Primero().
     def Empezar(self):
         self.regla = 0
         self.regla_pequena = True
@@ -573,8 +496,6 @@ class Ir():
         if self.abierta:
             self.ventana.after(numero, self.Primero)
 
-
-    # Determines whether rotating the top face would place an edge piece in the right location
     def Primero(self):
         if self.regla == 0:
             cero = 0
@@ -601,8 +522,6 @@ class Ir():
             if self.abierta:
                 self.ventana.after(0, func)
 
-
-    # This function is only used if rotating the top face does in fact place an edge piece in the right location.
     def Primeras_vueltas(self):
         if self.regla == 0:
             if self.color != self.vago:
@@ -624,8 +543,6 @@ class Ir():
             if self.abierta:
                 self.ventana.after(0, func)
 
-
-    # Places all the edge pieces that belong on the top face where they should be
     def Aristas_ultimas(self):
         if self.regla == 0:
             declaracion = True
@@ -726,8 +643,6 @@ class Ir():
             if self.abierta:
                 self.ventana.after(0, func)
 
-
-    # Places all the corner pieces that belong on the top face where they should be
     def Vertices_ultimas(self):
         if self.regla == 0:
             cero = 0
@@ -828,8 +743,6 @@ class Ir():
             if self.abierta:
                 self.ventana.after(0, func)
 
-
-    # Places edge pieces that belong on the middle layer where they should go
     def Medio(self):
         if self.regla == 0:
             cero = 0
@@ -913,8 +826,6 @@ class Ir():
             if self.abierta:
                 self.ventana.after(0, func)
 
-
-    # Makes a cross with the edges on the bottom face
     def Cruz(self):
         if self.regla == 0:
             p_1 = self.cubo_de_roobit[self.base][1]
@@ -972,8 +883,6 @@ class Ir():
             if self.abierta:
                 self.ventana.after(0, func)
 
-
-    # Solves the bottom face so that it is one color
     def Esquinas(self):
         if self.regla == 0:
             p_0 = self.cubo_de_roobit[self.base][0]
@@ -1047,8 +956,6 @@ class Ir():
             if self.abierta:
                 self.ventana.after(0, func)
 
-
-    # Places the corner pieces that are on the bottom layer where they belong
     def Penultima(self):
         if self.regla == 0:
             lista = []
@@ -1098,8 +1005,6 @@ class Ir():
             if self.abierta:
                 self.ventana.after(0, func)
 
-
-    # Places the edge pieces that are on the bottom layer where they belong. This complete's the Rubiks Cube.
     def Ultima(self):
         if self.regla == 0:
             lista = []
@@ -1140,12 +1045,6 @@ class Ir():
                 if self.abierta:
                     self.ventana.after(0, self.Algoritmo)
 
-
-
-    #           BUTTONS AND CONTROLS
-
-    # Decides what function to call based on where the screen is clicked. It is responsible for determining whether the
-    # user is dragging the cube as well as any button clicks (when the Instruction menu is closed).
     def Raton(self, event):
         if self.abierta:
             equis = self.ventana.winfo_pointerx() - self.ventana.winfo_rootx()
@@ -1176,8 +1075,6 @@ class Ir():
                 if declaracion and self.abierta:
                     self.ventana.after(144, func)
 
-
-    # This is the "drag" function. It rotates the cube based on the direction in which the mouse moves.
     def Interpretar(self, event):
         if self.abierta:
             if self.rg == None and ((abs(self.x - self.ventana.winfo_pointerx()) >= 2 or
@@ -1207,8 +1104,6 @@ class Ir():
                     self.serie = False
                     self.ventana.after(0, self.Cambiar)
 
-
-    # Opens and closes the Instruction menu. Also activates and deactivates buttons and key presses accordingly.
     def Instrucciones(self):
         if self.regla_pequena and self.abierta:
             self.regla = 1
@@ -1296,8 +1191,6 @@ class Ir():
             self.ventana.update()
             self.regla_pequena = True
 
-
-    # Determines what button is clicked when the Instruction menu is up
     def Avanzar(self, event):
         if self.abierta:
             equis = self.ventana.winfo_pointerx() - self.ventana.winfo_rootx()
@@ -1314,8 +1207,6 @@ class Ir():
             if declaracion and self.abierta:
                 self.ventana.after(144, func)
 
-
-    # Changes the page when the "Next" or "Back" button is clicked
     def Pequena_bdp(self):
         self.boton_de_pagina.configure(bg="#00FFFF")
         if self.boton_de_pagina["text"] == "Next" and self.abierta:
@@ -1344,15 +1235,11 @@ class Ir():
             self.teclado_2.place_forget()
             self.teclado_3.place_forget()
 
-
-    # Closes the instruction menu after "Return" is clicked
     def Pequena_i(self):
         self.instrucciones.configure(bg="#A0FFFF", relief="raised")
         if self.abierta:
             self.ventana.after(0, self.Instrucciones)
 
-
-    # Activates when "Solve" is clicked. Starts the AI solving process (with animation).
     def Intro(self):
         self.resolver.configure(bg="#A0FFFF", relief="raised")
         if self.regla == 0 and self.resolver["text"] == "Stop":
@@ -1369,16 +1256,12 @@ class Ir():
             if self.abierta:
                 self.ventana.after(0, self.Empezar)
 
-
-    # Activates when "Quick Solve" is clicked. Starts the AI solving process (without animation).
     def Rapido(self):
         self.resolver.configure(text="Stop")
         self.tiempo = 0
         if self.abierta:
             self.ventana.after(0, self.Empezar)
 
-
-    # Scrambles the cube when the space key is pressed
     def Cifrar(self, event):
         if self.regla == 1:
             self.regla = 0
@@ -1388,8 +1271,6 @@ class Ir():
                 self.Crear()
             self.regla = 1
 
-
-    # Changes the lighting effects when the Enter key is pressed
     def Brillo(self, event):
         if self.contraste:
             self.contraste = False
@@ -1399,9 +1280,6 @@ class Ir():
             self.conversion = ["#C0C0C0", "#0060C0", "#C00000", "#C0C000", "#00C060", "#C06C00"]
         if self.serie and self.abierta:
             self.ventana.after(0, self.Crear)
-
-
-    # The following twelve commands are named after their respective keys. The instructions explain what they do.
 
     def E(self, event):
         if self.regla == 1 and self.ra == None:
@@ -1507,11 +1385,6 @@ class Ir():
             if self.serie and self.abierta:
                 self.ventana.after(0, self.Cambiar)
 
-
-
-    #           SETUP
-
-    # Assigns commands to onscreen buttons and creates text boxes. It is only called once at the beginning.
     def Primero_Boton(self):
         color = "#A0FFFF"
         crayon = "#FFFFFF"
@@ -1544,8 +1417,6 @@ class Ir():
         else:
             self.texto = tk.Label(self.estuche, font=("Helvetica", 14), bg=crayon, fg="#000000", justify=tk.LEFT)
 
-    # Assigns commands to key presses and the screen click. It is called once at the beginning and whenever the
-    # instruction menu is closed.
     def Boton(self):
         self.ventana.bind("<Button-1>", self.Raton)
         self.ventana.bind("<space>", self.Cifrar)
@@ -1575,11 +1446,6 @@ class Ir():
         self.ventana.bind("D", self.D)
         self.ventana.bind("S", self.S)
 
-
-    # Creates and stores data required for the program, most of which is numerical. It is only called once at the
-    # beginning. Note that locations of points on the cube are recorded as quaternions, with i, j, k values acting as
-    # x, y, z coordinates. Sometimes a real value of 0 will precede these coordinates; this only occurs when doing so
-    # aids in quaternion multiplication. The instructions are also written here.
     def Sistema(self):
         self.abierta = True
         self.serie = True
@@ -1730,7 +1596,4 @@ F:  turns the bottom side right
 X:  turns the left side down
 C:  turns the right side down\n"""
 
-
-
-# Calls the function at the very top of the script, which sets everything into motion.
 principal()
